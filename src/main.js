@@ -11,25 +11,49 @@ import contactHTML from './sections/contact.html?raw'
  * Dynamically computes and updates the project counter badges based on projects.js
  */
 function updateCategoryBadges() {
-  const totalCount = projects.length;
-  const totalBadge = document.querySelector('[data-count-badge="all"]');
-  if (totalBadge) totalBadge.textContent = totalCount;
 
-  const tabButtons = document.querySelectorAll('.tab-btn');
-  
+  const featuredCount =
+    projects.filter(project => project.featured).length;
+
+  const featuredBadge =
+    document.querySelector('[data-count-badge="featured"]');
+
+  if (featuredBadge) {
+    featuredBadge.textContent = featuredCount;
+  }
+
+  const tabButtons =
+    document.querySelectorAll('.tab-btn');
+
   tabButtons.forEach(button => {
-    const category = button.getAttribute('data-filter');
-    if (category === 'all') return;
 
-    const matchingCount = projects.filter(project => project.category === category).length;
-    const badge = button.querySelector('[data-count-badge]');
+    const category =
+      button.getAttribute('data-filter');
+
+    if (category === 'featured') return;
+
+    const matchingCount =
+      projects.filter(project =>
+        project.categories?.includes(category)
+      ).length;
+
+    const badge =
+      button.querySelector('[data-count-badge]');
+
     if (badge) {
+
       badge.textContent = matchingCount;
-      
+
       if (matchingCount === 0) {
-        badge.classList.replace('text-slate-500', 'text-slate-600/40');
+        badge.classList.replace(
+          'text-slate-500',
+          'text-slate-600/40'
+        );
       } else {
-        badge.classList.replace('text-slate-600/40', 'text-slate-500');
+        badge.classList.replace(
+          'text-slate-600/40',
+          'text-slate-500'
+        );
       }
     }
   });
@@ -110,7 +134,7 @@ function renderProjects() {
   }
 
   grid.innerHTML = projects.map(project => `
-    <div class="project-card-wrapper h-full" data-category="${project.category}">
+    <div class="project-card-wrapper h-full" data-categories="${project.categories.join(',')}" data-featured="${project.featured}">
       <div class="project-card relative p-[1px] rounded-2xl overflow-hidden bg-slate-950/95 border border-slate-800/80 transition-all duration-300 h-full flex flex-col">
           
         <div class="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition duration-300 card-radial-glow"
@@ -235,35 +259,92 @@ function initMobileMenu() {
 /**
  * Global Category Filtering Engine Configuration
  */
-window.filterCategory = function(selectedButton, categoryKey) {
-  const allTabs = document.querySelectorAll('.tab-btn');
+window.filterCategory = function (
+  selectedButton,
+  categoryKey
+) {
+
+  const allTabs =
+    document.querySelectorAll('.tab-btn');
+
   allTabs.forEach(btn => {
-    btn.classList.remove('tab-active-gradient', 'text-white');
+
+    btn.classList.remove(
+      'tab-active-gradient',
+      'text-white'
+    );
+
     btn.classList.add('text-slate-400');
-    
-    const badge = btn.querySelector('.font-mono');
+
+    const badge =
+      btn.querySelector('.font-mono');
+
     if (badge) {
-      badge.classList.replace('text-slate-400', 'text-slate-500');
+      badge.classList.replace(
+        'text-slate-400',
+        'text-slate-500'
+      );
     }
   });
 
-  selectedButton.classList.add('tab-active-gradient', 'text-white');
-  selectedButton.classList.remove('text-slate-400');
+  selectedButton.classList.add(
+    'tab-active-gradient',
+    'text-white'
+  );
 
-  const activeBadge = selectedButton.querySelector('.font-mono');
+  selectedButton.classList.remove(
+    'text-slate-400'
+  );
+
+  const activeBadge =
+    selectedButton.querySelector('.font-mono');
+
   if (activeBadge) {
-    activeBadge.classList.replace('text-slate-500', 'text-slate-400');
+    activeBadge.classList.replace(
+      'text-slate-500',
+      'text-slate-400'
+    );
   }
 
-  const projectCards = document.querySelectorAll('.project-card-wrapper');
+  const projectCards =
+    document.querySelectorAll(
+      '.project-card-wrapper'
+    );
+
   projectCards.forEach(card => {
-    const cardCategory = card.getAttribute('data-category');
-    if (categoryKey === 'all' || cardCategory === categoryKey) {
-      card.style.display = 'block';
+
+    const featured =
+      card.getAttribute('data-featured') === 'true';
+
+    const categories =
+      card.getAttribute('data-categories')
+          .split(',');
+
+    let shouldShow = false;
+
+    if (categoryKey === 'featured') {
+
+      shouldShow = featured;
+
     } else {
-      card.style.display = 'none';
+
+      shouldShow =
+        categories.includes(categoryKey);
+
     }
+
+    if (shouldShow) {
+
+      card.classList.remove('hidden');
+
+    } else {
+
+      card.classList.add('hidden');
+
+    }
+
   });
+
 }
 
 /**
@@ -284,8 +365,17 @@ function initApplication() {
   initMobileMenu();
 
   // 5. Initialize layout defaults
-  const allButton = document.querySelector('[data-filter="all"]');
-  if (allButton) allButton.classList.add('tab-active-gradient');
+  const featuredButton =
+  document.querySelector(
+    '[data-filter="featured"]'
+  );
+
+  if (featuredButton) {
+    filterCategory(
+      featuredButton,
+      'featured'
+    );
+  }
 }
 
 // Fire application instantly
