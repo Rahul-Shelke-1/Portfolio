@@ -18,7 +18,7 @@
           Featured Projects
         </h2>
 
-        <div class="w-full overflow-x-auto pb-2 mb-10 scrollbar-none">
+        <!-- <div class="w-full overflow-x-auto pb-2 mb-10 scrollbar-none">
           <div class="flex items-center space-x-3 min-w-max px-2">
           
             <button onclick="filterCategory(this, 'featured')" data-filter="featured" class="tab-btn relative p-[1.5px] rounded-xl overflow-hidden transition-all duration-300 bg-transparent text-white">
@@ -94,6 +94,96 @@
             </button>
 
           </div>
+        </div> -->
+
+        <div class="w-full overflow-x-auto pb-2 mb-10 scrollbar-none">
+          <div class="flex items-center space-x-3 min-w-max px-2">
+          
+            <button onclick="filterCategory(this, 'featured')" data-filter="featured" class="tab-btn relative p-[1.5px] rounded-xl overflow-hidden transition-all duration-300 bg-transparent text-white">
+              <div class="flex items-center gap-2 px-4 py-2.5 rounded-[11px] bg-slate-900/40 hover:bg-slate-800/60 font-medium text-sm transition-colors">
+                <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
+                <span>Featured</span>
+                <span data-count-badge="featured" class="text-xs bg-slate-800 text-slate-400 px-2 py-0.5 rounded-full font-mono ml-1">0</span>
+              </div>
+            </button>
+
+            <button onclick="filterCategory(this, 'ml')" data-filter="ml" class="tab-btn relative p-[1.5px] rounded-xl overflow-hidden transition-all duration-300 bg-transparent text-slate-400">
+              <div class="flex items-center gap-2 px-4 py-2.5 rounded-[11px] bg-slate-900/40 hover:bg-slate-800/60 font-medium text-sm transition-colors">
+                <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+                <span>ML</span>
+                <span data-count-badge="ml" class="text-xs bg-slate-800 text-slate-500 px-2 py-0.5 rounded-full font-mono ml-1">0</span>
+              </div>
+            </button>
+
+            <button onclick="filterCategory(this, 'dl')" data-filter="dl" class="tab-btn relative p-[1.5px] rounded-xl overflow-hidden transition-all duration-300 bg-transparent text-slate-400">
+              <div class="flex items-center gap-2 px-4 py-2.5 rounded-[11px] bg-slate-900/40 hover:bg-slate-800/60 font-medium text-sm transition-colors">
+                <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><circle cx="5" cy="12" r="2"/><circle cx="19" cy="12" r="2"/><circle cx="12" cy="19" r="2"/><path d="M12 7v10M7 12h10M10.5 6.5l3 11M13.5 6.5l-3 11"/></svg>
+                <span>DL</span>
+                <span data-count-badge="dl" class="text-xs bg-slate-800 text-slate-500 px-2 py-0.5 rounded-full font-mono ml-1">0</span>
+              </div>
+            </button>
+
+            <button onclick="filterCategory(this, 'nlp')" data-filter="nlp" class="tab-btn relative p-[1.5px] rounded-xl overflow-hidden transition-all duration-300 bg-transparent text-slate-400">
+              <div class="flex items-center gap-2 px-4 py-2.5 rounded-[11px] bg-slate-900/40 hover:bg-slate-800/60 font-medium text-sm transition-colors">
+                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+                <span>NLP</span>
+                <span data-count-badge="nlp" class="text-xs bg-slate-800 text-slate-500 px-2 py-0.5 rounded-full font-mono ml-1">0</span>
+              </div>
+            </button>
+
+            <button onclick="filterCategory(this, 'genai')" data-filter="genai" class="tab-btn relative p-[1.5px] rounded-xl overflow-hidden transition-all duration-300 bg-transparent text-slate-400">
+              <div class="flex items-center gap-2 px-4 py-2.5 rounded-[11px] bg-slate-900/40 hover:bg-slate-800/60 font-medium text-sm transition-colors">
+                <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 256 256">
+                  <path d="M199.77344,125.2334,149.3457,106.6543,130.7666,56.22656a19.9996,19.9996,0,0,0-37.5332,0L74.6543,106.6543,24.22656,125.2334a19.9996,19.9996,0,0,0,0,37.5332L74.6543,181.3457l18.5791,50.42774a19.9996,19.9996,0,0,0,37.5332,0l18.5791-50.42774,50.42774-18.5791a19.9996,19.9996,0,0,0,0-37.5332Zm-60.45606,34.22949a19.97179,19.97179,0,0,0-11.85449,11.85449l.001-.001L112,213.28906,96.53711,171.31738a19.96863,19.96863,0,0,0-11.85352-11.85351L42.71094,144l41.97168-15.46289a19.96863,19.96863,0,0,0,11.85351-11.85352L112,74.71094l15.46289,41.97168a19.96863,19.96863,0,0,0,11.85352,11.85351L181.28906,144ZM140,40a12.0006,12.0006,0,0,1,12-12h12V16a12,12,0,0,1,24,0V28h12a12,12,0,0,1,0,24H188V64a12,12,0,0,1-24,0V52H152A12.0006,12.0006,0,0,1,140,40ZM252,88a12.0006,12.0006,0,0,1-12,12h-4v4a12,12,0,0,1-24,0v-4h-4a12,12,0,0,1,0-24h4V72a12,12,0,0,1,24,0v4h4A12.0006,12.0006,0,0,1,252,88Z"/>
+                </svg>
+                <span>GenAI</span>
+                <span data-count-badge="genai" class="text-xs bg-slate-800 text-slate-500 px-2 py-0.5 rounded-full font-mono ml-1">0</span>
+              </div>
+            </button>
+
+            <button onclick="filterCategory(this, 'agentic')" data-filter="agentic" class="tab-btn relative p-[1.5px] rounded-xl overflow-hidden transition-all duration-300 bg-transparent text-slate-400">
+              <div class="flex items-center gap-2 px-4 py-2.5 rounded-[11px] bg-slate-900/40 hover:bg-slate-800/60 font-medium text-sm transition-colors">
+                <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" /></svg>
+                <span>Agentic AI</span>
+                <span data-count-badge="agentic" class="text-xs bg-slate-800 text-slate-500 px-2 py-0.5 rounded-full font-mono ml-1">0</span>
+              </div>
+            </button>
+
+            <button onclick="filterCategory(this, 'mlops')" data-filter="mlops" class="tab-btn relative p-[1.5px] rounded-xl overflow-hidden transition-all duration-300 bg-transparent text-slate-400">
+              <div class="flex items-center gap-2 px-4 py-2.5 rounded-[11px] bg-slate-900/40 hover:bg-slate-800/60 font-medium text-sm transition-colors">
+                <svg class="w-4 h-4 text-rose-400" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 16 16">
+                  <path d="m5 5c2.5 1 3.5 5 6 6s3.25-1.25 3.25-3-.75-4-3.25-3-3.5 5-6 6-3.25-1.25-3.25-3 .75-4 3.25-3z"/>
+                </svg>
+                <span>MLOps</span>
+                <span data-count-badge="mlops" class="text-xs bg-slate-800 text-slate-500 px-2 py-0.5 rounded-full font-mono ml-1">0</span>
+              </div>
+            </button>
+
+            <button onclick="filterCategory(this, 'llmops')" data-filter="llmops" class="tab-btn relative p-[1.5px] rounded-xl overflow-hidden transition-all duration-300 bg-transparent text-slate-400">
+              <div class="flex items-center gap-2 px-4 py-2.5 rounded-[11px] bg-slate-900/40 hover:bg-slate-800/60 font-medium text-sm transition-colors">
+                <svg class="w-3.5 h-3.5 text-fuchsia-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 9.172V5L8 4z" /></svg>
+                <span>LLMOps</span>
+                <span data-count-badge="llmops" class="text-xs bg-slate-800 text-slate-500 px-2 py-0.5 rounded-full font-mono ml-1">0</span>
+              </div>
+            </button>
+
+            <button onclick="filterCategory(this, 'dataeng')" data-filter="dataeng" class="tab-btn relative p-[1.5px] rounded-xl overflow-hidden transition-all duration-300 bg-transparent text-slate-400">
+              <div class="flex items-center gap-2 px-4 py-2.5 rounded-[11px] bg-slate-900/40 hover:bg-slate-800/60 font-medium text-sm transition-colors">
+                <svg class="w-4 h-4 text-orange-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" /></svg>
+                <span>Data Eng</span>
+                <span data-count-badge="dataeng" class="text-xs bg-slate-800 text-slate-500 px-2 py-0.5 rounded-full font-mono ml-1">0</span>
+              </div>
+            </button>
+
+            <button onclick="filterCategory(this, 'analytics')" data-filter="analytics" class="tab-btn relative p-[1.5px] rounded-xl overflow-hidden transition-all duration-300 bg-transparent text-slate-400">
+              <div class="flex items-center gap-2 px-4 py-2.5 rounded-[11px] bg-slate-900/40 hover:bg-slate-800/60 font-medium text-sm transition-colors">
+                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2z" /></svg>
+                <span>Analytics</span>
+                <span data-count-badge="analytics" class="text-xs bg-slate-800 text-slate-500 px-2 py-0.5 rounded-full font-mono ml-1">0</span>
+              </div>
+            </button>
+
+          </div>
         </div>
 
         <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
@@ -102,6 +192,75 @@
       <div id="about-section"></div>
       <div id="contact-section"></div>
     </main>
+
+<dialog
+  id="architecture-modal"
+  class="m-auto w-[90vw] max-w-7xl h-[90vh]
+         rounded-2xl
+         border border-purple-500/30
+         shadow-[0_0_60px_rgba(168,85,247,0.25)]
+         bg-slate-950"
+>
+    <div class="flex flex-col h-full">
+
+      <!-- Header -->
+      <div class="flex items-center justify-between p-5 border-b border-slate-800">
+
+        <h2
+          id="architecture-title"
+          class="text-2xl font-bold text-white"
+        ></h2>
+
+        <button
+          onclick="closeArchitecture()"
+          class="text-slate-400 hover:text-white text-3xl leading-none"
+        >
+          ×
+        </button>
+
+      </div>
+
+      <!-- Image Area -->
+      <div class="flex-1 flex items-center justify-center gap-4 p-6">
+
+        <!-- Previous -->
+        <button
+          onclick="previousArchitecture()"
+          class="text-white text-3xl hover:text-purple-400 transition px-4"
+        >
+          ◀
+        </button>
+
+        <!-- Current Image -->
+        <div
+          id="architecture-viewer"
+          class="flex-1 flex items-center justify-center"
+        >
+          <img
+            src="..."
+            class="max-w-full max-h-[70vh] object-contain rounded-xl"
+          />
+        </div>
+
+        <!-- Next -->
+        <button
+          onclick="nextArchitecture()"
+          class="text-white text-3xl hover:text-purple-400 transition px-4"
+        >
+          ▶
+        </button>
+
+      </div>
+
+      <!-- Pagination Dots -->
+      <div
+        id="architecture-pagination"
+        class="flex justify-center gap-2 pb-5"
+      >
+      </div>
+
+    </div>
+  </dialog>
 
     <script type="module" src="/src/main.js"></script>
   </body>

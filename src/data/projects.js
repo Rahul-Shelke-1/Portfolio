@@ -1,3 +1,5 @@
+//title : 67 characters
+//description: 49 x 2-3 characters
 export const projects = [
   // ML Projects
   {
@@ -22,6 +24,14 @@ export const projects = [
       sourceUrl: "#",
       caseStudyUrl: "#",
       archModalId: "rag-arch-modal"
+    },
+    architecture: {
+      images: [
+        "/architecture/rag/1.webp",
+        "/architecture/rag/2.webp",
+        "/architecture/rag/3.webp",
+        "/architecture/rag/6.jpg"
+      ]
     }
   },
   {

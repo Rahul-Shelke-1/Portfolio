@@ -126,6 +126,7 @@ function getDemoButtonHTML(project) {
 /**
  * Dynamic Cards Generation Engine
  */
+// onclick="document.getElementById('${project.links.archModalId}').showModal()" 
 function renderProjects() {
   const grid = document.getElementById('projects-grid');
   if (!grid) {
@@ -174,7 +175,7 @@ function renderProjects() {
 
             <div class="flex items-center justify-between text-[11px] px-0.5">
               <button 
-                onclick="document.getElementById('${project.links.archModalId}').showModal()" 
+                onclick="openArchitecture('${project.id}')"
                 class="flex items-center gap-1 text-slate-400 ${project.theme.iconHoverClass} transition cursor-pointer bg-transparent border-none p-0 focus:outline-none"
               >
                 <svg class="w-3 h-3 stroke-current fill-none stroke-2" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="4" rx="1" /><rect x="3" y="17" width="6" height="4" rx="1" /><rect x="15" y="17" width="6" height="4" rx="1" /><path d="M12 7v5M12 12H6v5M12 12h6v5" /></svg>
@@ -346,6 +347,118 @@ window.filterCategory = function (
   });
 
 }
+
+let currentArchitectureImages = [];
+let currentArchitectureIndex = 0;
+
+window.openArchitecture = function(projectId) {
+
+  const project = projects.find(p => p.id === projectId);
+
+  if (!project) return;
+
+  currentArchitectureImages = project.architecture.images;
+  currentArchitectureIndex = 0;
+
+  document.getElementById("architecture-title").textContent =
+    project.title;
+
+  renderArchitectureImage();
+
+  document
+    .getElementById("architecture-modal")
+    .showModal();
+  
+  console.log(currentArchitectureImages[currentArchitectureIndex]);
+};
+
+window.closeArchitecture = function () {
+
+  const modal =
+    document.getElementById("architecture-modal");
+
+  modal.close();
+
+  document.body.classList.remove("overflow-hidden");
+
+  document.getElementById("architecture-modal").close();
+
+};
+
+/* Render the current image */
+function renderArchitectureImage() {
+  const base = import.meta.env.BASE_URL;
+
+  const imagePath =
+    `${base}${currentArchitectureImages[currentArchitectureIndex]}`;
+
+  console.log(imagePath);
+
+  document.getElementById("architecture-viewer").innerHTML = `
+    <img
+      src="${imagePath}"
+      class="max-w-full max-h-[70vh] object-contain rounded-xl"
+      loading="lazy"
+      onerror="console.error('Image failed:', this.src)"
+    />
+  `;
+}
+
+/* previous */
+window.previousArchitecture = function() {
+
+  currentArchitectureIndex =
+    (
+      currentArchitectureIndex - 1 +
+      currentArchitectureImages.length
+    ) % currentArchitectureImages.length;
+
+  renderArchitectureImage();
+
+};
+
+/* next */
+window.nextArchitecture = function() {
+
+  currentArchitectureIndex =
+    (currentArchitectureIndex + 1) %
+    currentArchitectureImages.length;
+
+  renderArchitectureImage();
+
+};
+
+
+
+const architectureModal =
+  document.getElementById("architecture-modal");
+
+architectureModal.addEventListener("click", e => {
+
+  const rect =
+    architectureModal.getBoundingClientRect();
+
+  const inside =
+    rect.top <= e.clientY &&
+    e.clientY <= rect.bottom &&
+    rect.left <= e.clientX &&
+    e.clientX <= rect.right;
+
+  if (!inside) {
+
+    architectureModal.close();
+
+  }
+
+});
+
+architectureModal.addEventListener("cancel", e => {
+
+  e.preventDefault();
+
+  architectureModal.close();
+
+});
 
 /**
  * Master Application Lifecycle Execution Pipeline

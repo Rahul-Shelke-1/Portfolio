@@ -22,3 +22,44 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.4; filter: drop-shadow(0 0 5px rgba(147, 51, 234, 0.3)); }
+  50% { opacity: 1; filter: drop-shadow(0 0 20px rgba(147, 51, 234, 0.6)); }
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+
+/* Slower card pulsing (increased from 3s to 6s) */
+.animate-glow {
+  animation: pulseGlow 6s infinite ease-in-out;
+}
+
+/* Slower line laser movement (increased from 2s to 4.5s) */
+.animate-line {
+  stroke-dasharray: 8, 6; /* Slightly wider gaps for better visibility at slow speeds */
+  animation: dash 4.5s linear infinite;
+}
+
+/* Wider stagger delays so steps light up one after another distinctly */
+.delay-1 { animation-delay: 0s; }
+.delay-2 { animation-delay: 1.5s; }
+.delay-3 { animation-delay: 3.0s; }
+.delay-4 { animation-delay: 4.5s; }
+.delay-5 { animation-delay: 6.0s; }
+
+/* dialog box style*/
+
+#architecture-modal {
+    margin: auto;
+    padding: 0;
+    border: none;
+}
+
+#architecture-modal::backdrop {
+    background: rgba(0, 0, 0, 0.7);
+}
