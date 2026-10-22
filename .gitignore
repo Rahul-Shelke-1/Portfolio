@@ -213,3 +213,5 @@ node_modules/
 original
 original_project_code
 run_site.txt
+
+public/assets
