@@ -209,3 +209,7 @@ node_modules/
 
 *.DS_Store
 .vscode
+
+original
+original_project_code
+run_site.txt
