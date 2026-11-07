@@ -1,5 +1,8 @@
+console.log("MAIN.JS LOADED");
+
 import './style.css'
 import { projects } from './data/projects.js'
+import { flagshipProjects } from './data/flagship-projects.js'
 
 // 1. ASSET STRINGS ENGINE VIA VITE COMPILER MACROS
 import navbarHTML from './sections/navbar.html?raw'
