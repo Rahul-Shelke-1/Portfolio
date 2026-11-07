@@ -63,3 +63,372 @@
 #architecture-modal::backdrop {
     background: rgba(0, 0, 0, 0.7);
 }
+
+
+/* =========================================
+   Flagship Projects Accordion
+   ========================================= */
+
+.flagship-accordion-item {
+  overflow: hidden;
+  border: 1px solid rgb(71 85 105 / 0.65);
+  border-radius: 1rem;
+  background: rgb(15 23 42 / 0.62);
+  transition: border-color 180ms ease;
+}
+
+.flagship-accordion-item.is-expanded {
+  border-color: rgb(59 130 246 / 0.7);
+  box-shadow: 0 0 24px rgb(59 130 246 / 0.08);
+}
+
+.flagship-accordion-trigger {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 100%;
+  padding: 1.25rem;
+  text-align: left;
+  background: transparent;
+  cursor: pointer;
+}
+
+.flagship-accordion-trigger:hover {
+  background: rgb(30 41 59 / 0.4);
+}
+
+.flagship-project-heading {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.flagship-project-title {
+  color: #f8fafc;
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.flagship-project-description {
+  color: #94a3b8;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.flagship-project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
+}
+
+.flagship-expand-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid rgb(71 85 105 / 0.6);
+  border-radius: 0.6rem;
+  color: #67e8f9;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.flagship-chip,
+.flagship-tech-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.6rem;
+  border: 1px solid rgb(71 85 105 / 0.5);
+  border-radius: 0.45rem;
+  background: rgb(30 41 59 / 0.75);
+  color: #cbd5e1;
+  font-size: 0.7rem;
+  line-height: 1.35;
+}
+
+.flagship-accordion-panel[hidden] {
+  display: none !important;
+}
+
+.flagship-accordion-panel {
+  padding: 0 1.25rem 1.5rem;
+}
+
+.flagship-discipline-tabs {
+  display: flex;
+  overflow-x: auto;
+  gap: 0.25rem;
+  margin: 0 -1.25rem 1.5rem;
+  padding: 0 1.25rem;
+  border-top: 1px solid rgb(71 85 105 / 0.55);
+  border-bottom: 1px solid rgb(71 85 105 / 0.55);
+  scrollbar-width: none;
+}
+
+.flagship-discipline-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.flagship-discipline-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  flex: 0 0 auto;
+  min-height: 3.25rem;
+  padding: 0.8rem 1rem;
+  border-bottom: 2px solid transparent;
+  color: #94a3b8;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+  background: transparent;
+  cursor: pointer;
+  transition: color 180ms ease, background 180ms ease;
+}
+
+.flagship-discipline-tab:hover {
+  color: white;
+  background: rgb(30 41 59 / 0.5);
+}
+
+.flagship-discipline-tab.is-active {
+  border-bottom-color: #3b82f6;
+  color: white;
+  background: rgb(37 99 235 / 0.12);
+}
+
+.flagship-tab-planned {
+  padding: 0.15rem 0.35rem;
+  border-radius: 0.25rem;
+  background: rgb(100 116 139 / 0.2);
+  color: #cbd5e1;
+  font-size: 0.625rem;
+}
+
+.flagship-status {
+  padding: 0.3rem 0.55rem;
+  border: 1px solid rgb(34 197 94 / 0.3);
+  border-radius: 999px;
+  background: rgb(34 197 94 / 0.1);
+  color: #86efac;
+  font-size: 0.7rem;
+}
+
+.flagship-status.is-planned {
+  border-color: rgb(148 163 184 / 0.3);
+  background: rgb(148 163 184 / 0.1);
+  color: #cbd5e1;
+}
+
+.flagship-bullet-list {
+  display: grid;
+  gap: 0.9rem;
+  color: #cbd5e1;
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.flagship-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 1.3rem;
+  height: 1.3rem;
+  margin-top: 0.1rem;
+  border-radius: 50%;
+  background: rgb(37 99 235 / 0.2);
+  color: #67e8f9;
+  font-weight: 700;
+}
+
+.flagship-primary-link,
+.flagship-secondary-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.7rem;
+  padding: 0.7rem 0.95rem;
+  border: 1px solid transparent;
+  border-radius: 0.65rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.flagship-primary-link {
+  background: #2563eb;
+  color: white;
+}
+
+.flagship-primary-link:hover {
+  background: #1d4ed8;
+}
+
+.flagship-secondary-link {
+  border-color: rgb(71 85 105 / 0.7);
+  background: rgb(15 23 42 / 0.55);
+  color: #cbd5e1;
+}
+
+.flagship-secondary-link:hover {
+  border-color: rgb(103 232 249 / 0.5);
+  color: white;
+}
+
+.flagship-system-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding-top: 1.25rem;
+  margin-top: 1.5rem;
+  border-top: 1px solid rgb(71 85 105 / 0.45);
+}
+
+.flagship-accordion-trigger:focus-visible,
+.flagship-discipline-tab:focus-visible,
+.flagship-primary-link:focus-visible,
+.flagship-secondary-link:focus-visible {
+  outline: 2px solid #22d3ee;
+  outline-offset: 3px;
+}
+
+@media (max-width: 639px) {
+  .flagship-accordion-trigger {
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+
+  .flagship-accordion-panel {
+    padding: 0 1rem 1.25rem;
+  }
+
+  .flagship-discipline-tabs {
+    margin-right: -1rem;
+    margin-left: -1rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+  .flagship-discipline-tab {
+    min-height: 3rem;
+    padding: 0.75rem 0.85rem;
+  }
+
+  .flagship-project-title {
+    font-size: 1rem;
+  }
+
+  .flagship-project-description {
+    font-size: 0.825rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flagship-accordion-item {
+    transition: none;
+  }
+}
+
+/* ==========================================
+   Flagship Project: Two-column detail layout
+========================================== */
+
+.flagship-detail-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+.flagship-detail-main {
+  min-width: 0;
+}
+
+.flagship-architecture {
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid rgb(51 65 85 / 0.65);
+  border-radius: 1rem;
+  background: rgb(15 23 42 / 0.55);
+}
+
+.flagship-architecture-title {
+  margin-bottom: 1rem;
+  color: white;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.flagship-architecture-gallery {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background: rgb(2 6 23 / 0.7);
+}
+
+.flagship-architecture-slide[hidden] {
+  display: none;
+}
+
+.flagship-architecture-slide img {
+  display: block;
+  width: 100%;
+  max-height: 480px;
+  object-fit: contain;
+  margin-inline: auto;
+}
+
+.flagship-architecture-caption {
+  padding: 0.75rem;
+  color: #94a3b8;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.flagship-gallery-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 1rem;
+  color: #cbd5e1;
+  font-size: 0.875rem;
+}
+
+.flagship-gallery-controls button {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid rgb(71 85 105);
+  border-radius: 0.5rem;
+  background: rgb(30 41 59);
+  color: white;
+  cursor: pointer;
+}
+
+.flagship-gallery-controls button:hover {
+  background: rgb(51 65 85);
+}
+
+/* Tablet and mobile */
+
+@media (max-width: 768px) {
+  .flagship-detail-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+
+  .flagship-architecture-slide img {
+    max-height: 360px;
+  }
+}
