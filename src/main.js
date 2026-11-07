@@ -973,32 +973,25 @@ architectureModal.addEventListener("cancel", e => {
  * Master Application Lifecycle Execution Pipeline
  * Runs instantly because ES Modules evaluate safely after DOM rendering.
  */
+
 function initApplication() {
-  // 1. Build layout container structures
-  loadLayoutArchitecture();
-  
-  // 2. Render layout content cards
-  renderProjects();
-  
-  // 3. Compute dynamic metric tracking counter badges
-  updateCategoryBadges();
-
-  // 4. Bind interactive nav menus
-  initMobileMenu();
-
-  // 5. Initialize layout defaults
-  const featuredButton =
-  document.querySelector(
-    '[data-filter="featured"]'
+  console.log("[DEBUG] Before layout:", 
+    document.getElementById("flagship-projects-accordion")
   );
 
-  if (featuredButton) {
-    filterCategory(
-      featuredButton,
-      'featured'
-    );
-  }
+  loadLayoutArchitecture();
+
+  console.log("[DEBUG] After layout:", 
+    document.getElementById("flagship-projects-accordion")
+  );
+
+  console.log("[DEBUG] Project section:", 
+    document.getElementById("project")
+  );
+
+  renderFlagshipAccordion();
+  initFlagshipAccordion();
+  initMobileMenu();
 }
 
-// Fire application instantly
 initApplication();
