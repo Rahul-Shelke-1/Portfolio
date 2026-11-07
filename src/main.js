@@ -10,6 +10,512 @@ import homeHTML from './sections/home.html?raw'
 import aboutHTML from './sections/about.html?raw'
 import contactHTML from './sections/contact.html?raw'
 
+const disciplineOrder = [
+  "dataEngineering",
+  "analytics",
+  "ml",
+  "genai",
+  "deployment",
+];
+
+const expandedFlagships = new Set();
+const activeDisciplines = {};
+
+const escapeHTML = (value = "") =>
+  String(value).replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;",
+  })[char]);
+
+function safeExternalUrl(url) {
+  if (typeof url !== "string") return null;
+
+  try {
+    const parsed = new URL(url, window.location.origin);
+
+    if (!["https:", "http:"].includes(parsed.protocol)) {
+      return null;
+    }
+
+    // Only allow relative URLs for same-origin resources.
+    if (
+      !url.startsWith("https://") &&
+      !url.startsWith("http://") &&
+      parsed.origin !== window.location.origin
+    ) {
+      return null;
+    }
+
+    return url;
+  } catch {
+    return null;
+  }
+}
+
+function renderProjectLink(url, label, primary = false) {
+  const safeUrl = safeExternalUrl(url);
+
+  if (!safeUrl) return "";
+
+  const external = /^https?:\/\//i.test(safeUrl);
+
+  return `
+    <a
+      href="${escapeHTML(safeUrl)}"
+      class="${primary ? "flagship-primary-link" : "flagship-secondary-link"}"
+      ${external ? 'target="_blank" rel="noopener noreferrer"' : ""}
+    >
+      ${escapeHTML(label)} <span aria-hidden="true">↗</span>
+    </a>
+  `;
+}
+
+function renderDisciplineContent(project, disciplineKey) {
+  const discipline = project.disciplines[disciplineKey];
+
+  if (!discipline) {
+    return `<p class="text-slate-400">No details are available yet.</p>`;
+  }
+
+  const isPlanned = discipline.status === "Planned";
+
+  const bullets = discipline.bullets?.length
+    ? `
+      <ul class="flagship-bullet-list">
+        ${discipline.bullets.map((bullet) => `
+          <li class="flex items-start gap-3">
+            <span class="flagship-check" aria-hidden="true">✓</span>
+            <span>${escapeHTML(bullet)}</span>
+          </li>
+        `).join("")}
+      </ul>
+    `
+    : `
+      <p class="text-sm text-slate-400">
+        Detailed implementation information will be added when this track is developed.
+      </p>
+    `;
+
+  const technologies = (discipline.technologies ?? []).map((technology) => `
+    <span class="flagship-tech-tag">${escapeHTML(technology)}</span>
+  `).join("");
+
+  const links = [
+    renderProjectLink(discipline.repositoryUrl, "View Repository", true),
+    renderProjectLink(discipline.docsUrl, "Documentation"),
+    renderProjectLink(discipline.demoUrl, "Live Demo"),
+  ].filter(Boolean).join("");
+
+  return `
+      <div>
+        <div class="flex flex-wrap items-center gap-3 mb-3">
+          <h4 class="text-2xl font-bold text-white">
+            ${escapeHTML(discipline.label)}
+          </h4>
+          <span class="flagship-status ${isPlanned ? "is-planned" : ""}">
+            ${escapeHTML(discipline.status ?? "In progress")}
+          </span>
+        </div>
+
+        <p class="text-slate-400 leading-relaxed mb-5">
+          ${escapeHTML(discipline.summary ?? "")}
+        </p>
+
+        ${bullets}
+
+        ${technologies ? `
+          <div class="flex flex-wrap gap-2 mt-6">
+            ${technologies}
+          </div>
+        ` : ""}
+
+        ${links ? `
+          <div class="flex flex-wrap gap-3 mt-7">
+            ${links}
+          </div>
+        ` : ""}
+      </div>
+  `;
+}
+
+function renderArchitectureGallery(images, projectId, disciplineKey) {
+  if (!Array.isArray(images) || images.length === 0) {
+    return "";
+  }
+
+  const validImages = images.filter(
+    (image) =>
+      image &&
+      typeof image.src === "string" &&
+      image.src.trim() !== ""
+  );
+
+  if (validImages.length === 0) {
+    return "";
+  }
+
+  const galleryId = `${projectId}-${disciplineKey}`;
+
+  const imageMarkup = validImages.map((image, index) => `
+    <div
+      class="flagship-architecture-slide"
+      data-gallery-slide="${index}"
+      ${index === 0 ? "" : "hidden"}
+    >
+      <img
+        src="${escapeHTML(image.src)}"
+        alt="${escapeHTML(image.alt ?? "System architecture diagram")}"
+        loading="lazy"
+      />
+
+      <p class="flagship-architecture-caption">
+        ${escapeHTML(image.caption ?? "")}
+      </p>
+    </div>
+  `).join("");
+
+  const navigation = validImages.length > 1
+    ? `
+      <div class="flagship-gallery-controls">
+        <button
+          type="button"
+          data-gallery-prev="${galleryId}"
+          aria-label="Previous architecture image"
+        >
+          &#8592;
+        </button>
+
+        <span data-gallery-counter="${galleryId}">
+          1 / ${validImages.length}
+        </span>
+
+        <button
+          type="button"
+          data-gallery-next="${galleryId}"
+          aria-label="Next architecture image"
+        >
+          &#8594;
+        </button>
+      </div>
+    `
+    : "";
+
+  return `
+    <aside class="flagship-architecture">
+      <h4 class="flagship-architecture-title">
+        System Architecture
+      </h4>
+
+      <div
+        class="flagship-architecture-gallery"
+        data-architecture-gallery="${galleryId}"
+        data-gallery-index="0"
+      >
+        ${imageMarkup}
+      </div>
+
+      ${navigation}
+    </aside>
+  `;
+}
+
+function renderFlagshipAccordion() {
+  const container = document.getElementById(
+    "flagship-projects-accordion"
+  );
+
+  if (!container) return;
+
+  container.innerHTML = flagshipProjects.map((project) => {
+    const expanded = expandedFlagships.has(project.id);
+
+    const disciplineKeys = disciplineOrder.filter(
+      (key) => project.disciplines[key]
+    );
+
+    const activeKey = project.disciplines[
+      activeDisciplines[project.id]
+    ]
+      ? activeDisciplines[project.id]
+      : disciplineKeys[0];
+
+    activeDisciplines[project.id] = activeKey;
+
+    const discipline = project.disciplines[activeKey];
+
+    const tags = (project.tags ?? []).map((tag) => `
+      <span class="flagship-chip">${escapeHTML(tag)}</span>
+    `).join("");
+
+    const tabs = disciplineKeys.map((key) => {
+      const discipline = project.disciplines[key];
+      const active = key === activeKey;
+
+      return `
+        <button
+          type="button"
+          id="tab-${escapeHTML(project.id)}-${escapeHTML(key)}"
+          class="flagship-discipline-tab ${active ? "is-active" : ""}"
+          data-discipline="${escapeHTML(key)}"
+          role="tab"
+          aria-selected="${active}"
+          aria-controls="panel-${escapeHTML(project.id)}"
+          tabindex="${active ? "0" : "-1"}"
+        >
+          ${escapeHTML(discipline.label)}
+          ${discipline.status === "Planned"
+            ? '<span class="flagship-tab-planned">Planned</span>'
+            : ""}
+        </button>
+      `;
+    }).join("");
+
+    return `
+      <article
+        class="flagship-accordion-item ${expanded ? "is-expanded" : ""}"
+        data-flagship-item="${escapeHTML(project.id)}"
+      >
+        <button
+          type="button"
+          class="flagship-accordion-trigger"
+          data-accordion-toggle="${escapeHTML(project.id)}"
+          aria-expanded="${expanded}"
+          aria-controls="panel-${escapeHTML(project.id)}"
+        >
+          <span class="flagship-project-icon" aria-hidden="true">
+            ${escapeHTML(project.icon)}
+          </span>
+
+          <span class="flagship-project-heading">
+            <span class="flagship-project-title">
+              ${escapeHTML(project.title)}
+            </span>
+            <span class="flagship-project-description">
+              ${escapeHTML(project.description)}
+            </span>
+            <span class="flagship-project-tags">${tags}</span>
+          </span>
+
+          <span class="flagship-expand-icon" aria-hidden="true">
+            ${expanded ? "⌄" : "›"}
+          </span>
+        </button>
+
+        <div
+          id="panel-${escapeHTML(project.id)}"
+          class="flagship-accordion-panel"
+          ${expanded ? "" : "hidden"}
+        >
+          <div
+            class="flagship-discipline-tabs"
+            role="tablist"
+            aria-label="${escapeHTML(project.title)} disciplines"
+          >
+            ${tabs}
+          </div>
+          <div
+            id="content-${escapeHTML(project.id)}"
+            class="flagship-discipline-content"
+            role="tabpanel"
+            aria-labelledby="tab-${escapeHTML(project.id)}-${escapeHTML(activeKey)}"
+            tabindex="0"
+          >
+            <div class="flagship-detail-layout">
+
+              <div class="flagship-detail-main">
+                ${renderDisciplineContent(project, activeKey)}
+
+              </div>
+
+              ${renderArchitectureGallery(
+                discipline.architectureImages,
+                project.id,
+                activeKey
+              )}
+
+            </div>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join("");
+
+  console.log(flagshipProjects);
+  document.querySelectorAll(
+  "#flagship-projects-accordion .flagship-accordion-trigger"
+  ).length;
+  console.log("Flagship projects:", flagshipProjects);
+  console.log("Rendered accordion HTML:", document.getElementById("flagship-projects-accordion")?.innerHTML);
+}
+
+function initFlagshipAccordion() {
+  const container = document.getElementById(
+    "flagship-projects-accordion"
+  );
+
+  if (!container || container.dataset.initialized === "true") return;
+
+  container.dataset.initialized = "true";
+
+  container.addEventListener("click", (event) => {
+    const toggle = event.target.closest("[data-accordion-toggle]");
+
+    if (toggle) {
+      const projectId = toggle.dataset.accordionToggle;
+
+      if (expandedFlagships.has(projectId)) {
+        expandedFlagships.delete(projectId);
+      } else {
+        expandedFlagships.clear();
+        expandedFlagships.add(projectId);
+      }
+
+      renderFlagshipAccordion();
+      return;
+    }
+
+    const tab = event.target.closest("[data-discipline]");
+
+    if (tab) {
+      const item = tab.closest("[data-flagship-item]");
+      if (!item) return;
+
+      const projectId = item.dataset.flagshipItem;
+      const disciplineKey = tab.dataset.discipline;
+
+      activeDisciplines[projectId] = disciplineKey;
+
+      const project = flagshipProjects.find(
+        (entry) => entry.id === projectId
+      );
+
+      if (!project) return;
+
+      const content = item.querySelector(
+        ".flagship-discipline-content"
+      );
+
+      // Re-render the complete accordion panel for the selected discipline.
+      renderFlagshipAccordion();
+
+      // Restore focus to the newly selected tab.
+      container
+        .querySelector(
+          `#${CSS.escape(tab.id)}`
+        )
+        ?.focus();
+
+      item.querySelectorAll("[data-discipline]").forEach((button) => {
+        const active = button.dataset.discipline === disciplineKey;
+
+        button.classList.toggle("is-active", active);
+        button.setAttribute("aria-selected", String(active));
+        button.tabIndex = active ? 0 : -1;
+      });
+    }
+  });
+
+  container.addEventListener("keydown", (event) => {
+    const tab = event.target.closest("[data-discipline]");
+
+    if (!tab) return;
+
+    const tabList = tab.closest('[role="tablist"]');
+    const tabs = [...tabList.querySelectorAll("[data-discipline]")];
+
+    let index = tabs.indexOf(tab);
+
+    if (event.key === "ArrowRight") {
+      index = (index + 1) % tabs.length;
+    } else if (event.key === "ArrowLeft") {
+      index = (index - 1 + tabs.length) % tabs.length;
+    } else if (event.key === "Home") {
+      index = 0;
+    } else if (event.key === "End") {
+      index = tabs.length - 1;
+    } else {
+      return;
+    }
+
+    event.preventDefault();
+
+    const nextTab = tabs[index];
+    const item = tab.closest("[data-flagship-item]");
+
+    activeDisciplines[item.dataset.flagshipItem] =
+      nextTab.dataset.discipline;
+
+    renderFlagshipAccordion();
+
+    container
+      .querySelector(`#${CSS.escape(nextTab.id)}`)
+      ?.focus();
+  });
+
+  // const container = document.getElementById(
+  //   "flagship-projects-accordion"
+  // );
+
+  container?.addEventListener("click", (event) => {
+    const nextButton = event.target.closest("[data-gallery-next]");
+    const prevButton = event.target.closest("[data-gallery-prev]");
+
+    if (!nextButton && !prevButton) return;
+
+    event.stopPropagation();
+
+    const galleryId = (
+      nextButton ?? prevButton
+    ).dataset.galleryNext ?? (
+      nextButton ?? prevButton
+    ).dataset.galleryPrev;
+
+    const gallery = [...container.querySelectorAll(
+      "[data-architecture-gallery]"
+    )].find((element) =>
+      element.dataset.architectureGallery === galleryId
+    );
+
+    if (!gallery) return;
+
+    const slides = [
+      ...gallery.querySelectorAll("[data-gallery-slide]")
+    ];
+
+    if (slides.length <= 1) return;
+
+    let currentIndex = Number(gallery.dataset.galleryIndex) || 0;
+
+    if (nextButton) {
+      currentIndex = (currentIndex + 1) % slides.length;
+    } else {
+      currentIndex = (
+        currentIndex - 1 + slides.length
+      ) % slides.length;
+    }
+
+    gallery.dataset.galleryIndex = currentIndex;
+
+    slides.forEach((slide, index) => {
+      slide.hidden = index !== currentIndex;
+    });
+
+    const counter = [...container.querySelectorAll(
+      "[data-gallery-counter]"
+    )].find((element) =>
+      element.dataset.galleryCounter === galleryId
+    );
+
+    if (counter) {
+      counter.textContent = `${currentIndex + 1} / ${slides.length}`;
+    }
+  });
+
+}
+
 /**
  * Dynamically computes and updates the project counter badges based on projects.js
  */
