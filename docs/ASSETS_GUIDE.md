@@ -31,11 +31,12 @@ Hero: Experience | https://www.svgrepo.com/svg/533478/building-user | `graduatio
 About: Problem Solver | https://www.svgrepo.com/svg/490592/bulb-lighting | `bulb-pink.svg` | `#FF13F0`
 About: Production First | https://www.svgrepo.com/svg/332317/deployment-unite | `code-green.svg` | `#34D399`
 About: Data Driven | https://www.svgrepo.com/svg/490592/bulb-lighting | `bar-graph-yellow.svg` | `#FFBF00`
-About: Always Learning | https://www.svgrepo.com/svg/490592/bulb-lighting | `book-blue.svg` | `#48a0db`
-Tech Stack | https://www.svgrepo.com/svg/533324/code | `code-pink.svg` | `#FF13F0`
-Tech Stack | https://www.svgrepo.com/svg/445500/ai | `machine-learning-blue.svg` | `#00BFFF`
-Tech Stack | https://www.svgrepo.com/svg/507641/database | `database-green.svg` | `#34D399`
-Tech Stack | https://www.svgrepo.com/svg/533324/code | `code.svg` | `#FF13F0`
+About: Continuous Learning | https://www.svgrepo.com/svg/490592/bulb-lighting | `book-blue.svg` | `#48a0db`
+Tech Stack: Language | https://www.svgrepo.com/svg/533324/code | `code-pink.svg` | `#FF13F0`
+Tech Stack: ML & AI | https://www.svgrepo.com/svg/445500/ai | `machine-learning-blue.svg` | `#00BFFF`
+Tech Stack: Data Engineering | https://www.svgrepo.com/svg/507641/database | `database-green.svg` | `#34D399`
+Tech Stack: MLOps & LLMOps | https://www.svgrepo.com/svg/478727/infinity-symbol | `infinity.svg` | `#FF007F`
+Tech Stack: Cloud & Infrastructure | https://www.svgrepo.com/svg/332216/amazon | `code.svg` | `#0ea5e9`
 
 ## Typography
 * **Primary Font:** Inter / Sans-serif
