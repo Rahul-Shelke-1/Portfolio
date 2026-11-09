@@ -976,11 +976,15 @@ architectureModal.addEventListener("cancel", e => {
  */
 
 function initApplication() {
+
   console.log("[DEBUG] Before layout:", 
     document.getElementById("flagship-projects-accordion")
   );
 
   loadLayoutArchitecture();
+
+  // 2. Initialize Hero architecture preview.
+  initHeroArchitecture(flagshipProjects);
 
   console.log("[DEBUG] After layout:", 
     document.getElementById("flagship-projects-accordion")
