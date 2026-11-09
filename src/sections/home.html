@@ -56,6 +56,7 @@
                 src=""
                 alt=""
                 loading="eager"
+                decoding="async"
             />
 
             <div class="hero-architecture__overlay">
@@ -70,7 +71,25 @@
         </a>
 
         <div class="hero-architecture__footer">
-            <span id="hero-architecture-counter">01 / 01</span>
+            <span
+                id="hero-architecture-counter"
+                aria-label="Architecture image number"
+            >
+                01 / 01
+            </span>
+
+            <div class="hero-architecture-progress">
+              <svg viewBox="0 0 44 44" class="progress-ring">
+                  <circle class="progress-ring-bg" cx="22" cy="22" r="18" />
+                  <circle
+                      id="hero-architecture-progress"
+                      class="progress-ring-fill"
+                      cx="22"
+                      cy="22"
+                      r="18"
+                  />
+              </svg>
+            </div>
 
             <a
                 href="#project"

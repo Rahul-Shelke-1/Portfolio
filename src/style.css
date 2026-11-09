@@ -572,3 +572,31 @@
         transition: none;
     }
 }
+
+.hero-architecture-progress {
+    margin-right: auto;
+}
+
+
+.progress-ring {
+    width: 20px;
+    height: 20px;
+    transform: rotate(-90deg);
+}
+
+.progress-ring-bg,
+.progress-ring-fill {
+    fill: none;
+    stroke-width: 3;
+}
+
+.progress-ring-bg {
+    stroke: rgba(148, 163, 184, 0.2);
+}
+
+.progress-ring-fill {
+    stroke: #a78bfa;
+    stroke-dasharray: 113.1;
+    stroke-dashoffset: 113.1;
+    stroke-linecap: round;
+}
