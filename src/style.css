@@ -432,3 +432,143 @@
     max-height: 360px;
   }
 }
+
+/* =========================================
+   HERO ARCHITECTURE PREVIEW
+========================================= */
+
+.hero-architecture {
+    width: 100%;
+    max-width: 620px;
+    padding: 18px;
+
+    background: var(--surface-secondary, #111827);
+    border: 1px solid var(--border-color, #293548);
+    border-radius: 16px;
+
+    overflow: hidden;
+}
+
+.hero-architecture__header,
+.hero-architecture__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.hero-architecture__header {
+    margin-bottom: 14px;
+}
+
+.hero-architecture__label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--text-secondary, #9ca3af);
+}
+
+.hero-architecture__status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--text-secondary, #9ca3af);
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #22c55e;
+}
+
+.hero-architecture__preview {
+    position: relative;
+    display: block;
+    width: 100%;
+
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+
+    background: #0b1220;
+    border-radius: 10px;
+}
+
+.hero-architecture__preview img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+    object-fit: contain;
+
+    transition: opacity 0.3s ease;
+}
+
+.hero-architecture__overlay {
+    position: absolute;
+    inset: auto 0 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    padding: 36px 16px 14px;
+
+    background: linear-gradient(
+        transparent,
+        rgba(0, 0, 0, 0.82)
+    );
+}
+
+.hero-architecture__project {
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.hero-architecture__caption {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.75rem;
+}
+
+.hero-architecture__footer {
+    margin-top: 14px;
+}
+
+.hero-architecture__footer > span {
+    font-size: 0.7rem;
+    color: var(--text-secondary, #9ca3af);
+    font-variant-numeric: tabular-nums;
+}
+
+.hero-architecture__footer a {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent-color, #22d3ee);
+    text-decoration: none;
+}
+
+.hero-architecture__footer a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .hero-architecture {
+        max-width: 100%;
+        padding: 12px;
+    }
+
+    .hero-architecture__preview {
+        aspect-ratio: 16 / 10;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-architecture__preview img {
+        transition: none;
+    }
+}
