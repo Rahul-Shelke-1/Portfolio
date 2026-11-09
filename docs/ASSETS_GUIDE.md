@@ -27,7 +27,7 @@ Section |Icon Name | Save with name | Color Code
 Hero: Projects | https://www.svgrepo.com/svg/533324/code | `code-pink.svg` | `#FF13F0`
 Hero: Domain | https://www.svgrepo.com/svg/408329/stack-apps-layers | `stack-blue.svg` | `#00BFFF`
 Hero: Deployments | https://www.svgrepo.com/svg/510170/rocket | `deployment-green.svg` | `#34D399`
-Hero: Experience | https://www.svgrepo.com/svg/533478/building-user | `experience-orange.svg` | `#FFA726`
+Hero: Experience | https://www.svgrepo.com/svg/533478/building-user | `graduation-cap.svg` | `#60A5FA`
 About: Problem Solver | https://www.svgrepo.com/svg/490592/bulb-lighting | `bulb-pink.svg` | `#FF13F0`
 About: Engineer at Heart | https://www.svgrepo.com/svg/533324/code | `code-green.svg` | `#34D399`
 About: Data Driven | https://www.svgrepo.com/svg/490592/bulb-lighting | `bar-graph-yellow.svg` | `#FFBF00`
