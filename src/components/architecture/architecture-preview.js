@@ -64,10 +64,12 @@ export function initHeroArchitecture(flagshipProjects) {
             `${String(architectures.length).padStart(2, "0")}`;
 
         // Update destination to the relevant project.
-        const projectId = project.id;
+        // const projectId = project.id;
 
-        link.href = `#${projectId}`;
-        explore.href = `#${projectId}`;
+        // link.href = `#${projectId}`;
+        // explore.href = `#${projectId}`;
+        link.href = "#project";
+        explore.href = "#project";
     }
 
     renderArchitecture(activeIndex);
