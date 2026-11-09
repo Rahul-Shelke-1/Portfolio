@@ -39,7 +39,18 @@ export const flagshipProjects = [
           "Define storage and data-modeling strategies",
           "Plan scheduling, observability, and failure recovery",
         ],
-        architectureImages: [],
+        architectureImages: [
+          {
+            src: "src/assets/projects/open-source/data-engineering/system-architecture.png",
+            alt: "Opportunity Intelligence Platform system architecture",
+            caption: "End-to-end system architecture",
+          },
+          {
+            src: "src/assets/projects/open-source/data-engineering/da.png",
+            alt: "Data ingestion and processing architecture",
+            caption: "Data ingestion and processing pipeline",
+          },
+        ],
         technologies: ["Python", "GitHub API", "SQL", "ETL"],
         repositoryUrl: openSourceRepo,
         docsUrl: openSourceRepo,
