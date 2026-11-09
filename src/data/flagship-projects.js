@@ -41,7 +41,7 @@ export const flagshipProjects = [
         ],
         architectureImages: [
           {
-            src: "src/assets/projects/open-source/data-engineering/system-architecture.png",
+            src: "./assets/projects/open-source/data-engineering/system-architecture.png",
             alt: "Opportunity Intelligence Platform system architecture",
             caption: "End-to-end system architecture",
           },
