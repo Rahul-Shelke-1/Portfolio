@@ -46,7 +46,7 @@ export const flagshipProjects = [
             caption: "End-to-end system architecture",
           },
           {
-            src: "src/assets/projects/open-source/data-engineering/da.png",
+            src: "/Portfolio/projects/open-source/data-engineering/da.png",
             alt: "Data ingestion and processing architecture",
             caption: "Data ingestion and processing pipeline",
           },
